@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Arslan Farid</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #fce4ec, #fffde7, #e0f7fa);
+      background-size: 400% 400%;
+      animation: gradientBG 20s ease infinite;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    .slide-up {
+      opacity: 0;
+      transform: translateY(50px);
+      animation: slideUp 1s ease forwards;
+    }
+
+    @keyframes slideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    header {
+      background-color: #1a237e;
+      color: white;
+      padding: 15px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    nav {
+      display: none;
+      flex-direction: column;
+      background-color: #1a237e;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      width: 200px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 10px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav a.active {
+      background-color: white;
+      color: #1a237e;
+      padding: 5px 10px;
+      border-radius: 6px;
+    }
+
+    .menu-icon {
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .hero img {
+      width: 230px;
+      height: 230px;
+      border-radius: 50%;
+      border: 4px solid #6a5acd;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+      object-fit: cover;
+    }
+
+    h1 {
+      color: #1a237e;
+      margin-top: 20px;
+      font-size: 2.2em;
+    }
+
+    section {
+      padding: 50px 20px;
+      max-width: 1000px;
+      margin: auto;
+      text-align: center;
+    }
+
+    section h2 {
+      color: #1a237e;
+      margin-bottom: 25px;
+      font-size: 1.8em;
+    }
+
+    .about-details p {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin: 20px auto;
+      max-width: 750px;
+    }
+
+    .line1 { color: #2e7d32; }
+    .line2 { color: #6a1b9a; }
+    .line3 { color: #0288d1; }
+    .line4 { color: #ef6c00; }
+    .line5 { color: #c2185b; }
+    .line6 { color: #1565c0; }
+
+    .social-links a {
+      display: inline-block;
+      margin: 12px;
+      text-decoration: none;
+      color: white;
+      background-color: #222;
+      padding: 10px 22px;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+
+    .social-links a i {
+      margin-right: 8px;
+    }
+
+    .social-links a:hover {
+      background-color: #000;
+    }
+
+    .project-list {
+      display: grid;
+      gap: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      margin-top: 20px;
+    }
+
+    .project-card {
+      background-color: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      font-size: 1.1rem;
+      transition: transform 0.3s;
+    }
+
+    .project-card:hover {
+      transform: scale(1.05);
+    }
+
+    .project-card i {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      display: block;
+      color: #6a1b9a;
+    }
+
+    .certificates ul {
+      list-style-type: none;
+      font-size: 1.2rem;
+    }
+
+    .certificates li {
+      margin: 12px 0;
+      color: #333;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #1a237e;
+      color: white;
+      margin-top: 30px;
+    }
+
+    @media (min-width: 768px) {
+      nav {
+        display: flex !important;
+        flex-direction: row;
+        position: static;
+        background: none;
+      }
+
+      nav a {
+        margin: 0 15px;
+      }
+
+      .menu-icon {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">Arslan Farid</div>
+    <div class="menu-icon" onclick="toggleMenu()">?</div>
+    <nav id="navLinks">
+      <a href="#about" onclick="setActive(this)">About</a>
+      <a href="#projects" onclick="setActive(this)">Projects</a>
+      <a href="#certificates" onclick="setActive(this)">Certificates</a>
+      <a href="#contact" onclick="setActive(this)">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero slide-up">
+    <img src="https://i.postimg.cc/1zRd2Tzk/Picsart-25-07-15-09-11-36-883.jpg" alt="Arslan Farid">
+    <h1>Hey, I'm Arslan Farid</h1>
+  </section>
+
+  <section id="about" class="slide-up">
+    <h2><i class="fas fa-user"></i> About Me</h2>
+    <div class="about-details">
+      <p class="line1">Hello! I'm <strong>Arslan Farid</strong>, a 17-year-old student of class 10th at LITTLE FLOWER CHILDREN SCHOOL.</p>
+      <p class="line2">I'm passionate about learning new things, especially in the field of technology and design.</p>
+      <p class="line3">From experimenting with HTML/CSS to building creative pages, I enjoy the world of coding and creation.</p>
+      <p class="line4">I believe every day is a new opportunity to grow, improve, and try something new.</p>
+      <p class="line5">Clean design, smart layout, and creativity — that's what I love to apply in my work.</p>
+      <p class="line6">This is just the beginning. I'm excited to explore more and learn continuously!</p>
+    </div>
+    <div class="social-links">
+      <a href="https://www.instagram.com/arslan_farid07" target="_blank">
+        <i class="fab fa-instagram"></i> Instagram
+      </a>
+      <a href="https://www.snapchat.com/add/arslanfarid07" target="_blank">
+        <i class="fab fa-snapchat-ghost"></i> Snapchat
+      </a>
+    </div>
+  </section>
+
+  <section id="projects" class="slide-up">
+    <h2><i class="fas fa-laptop-code"></i> My Projects</h2>
+    <div class="project-list">
+      <div class="project-card">
+        <i class="fas fa-globe"></i>
+        <strong>Personal Website</strong><br>
+        Designed my own colorful and animated site using HTML and CSS.
+      </div>
+      <div class="project-card">
+        <i class="fas fa-tasks"></i>
+        <strong>Homework Tracker</strong><br>
+        A simple project to help track assignments.
+      </div>
+      <div class="project-card">
+        <i class="fas fa-calculator"></i>
+        <strong>Simple Calculator</strong><br>
+        Made a basic calculator layout with HTML/CSS only.
+      </div>
+    </div>
+  </section>
+
+  <section id="certificates" class="certificates slide-up">
+    <h2><i class="fas fa-award"></i> Certificates</h2>
+    <ul>
+      <li><i class="fas fa-certificate"></i> HTML Beginner Certificate – CodeCamp</li>
+      <li><i class="fas fa-laptop"></i> Computer Basics – Workshop</li>
+      <li><i class="fas fa-medal"></i> IT Quiz Participation - 2024</li>
+    </ul>
+  </section>
+
+  <section id="contact" class="slide-up">
+    <h2><i class="fas fa-envelope"></i> Contact Me</h2>
+    <p>Email: <a href="mailto:arslanfarid2008@gmail.com">arslanfarid2008@gmail.com</a></p>
+    <p>Phone: <a href="tel:8090600696">8090600696</a></p>
+  </section>
+
+  <section class="slide-up">
+    <h2 style="color: #2e7d32;"><i class="fas fa-heart"></i> Thank You</h2>
+    <p style="font-size: 1.2rem; max-width: 800px; margin: auto; color: #444;">
+      Thank you for visiting my site!  
+      I'm learning, growing, and improving every day.  
+      Your time and support means a lot to me!
+    </p>
+  </section>
+
+  <footer>
+    © 2025 Arslan Farid. All rights reserved.
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      var menu = document.getElementById("navLinks");
+      menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+    }
+
+    function setActive(link) {
+      const links = document.querySelectorAll('nav a');
+      links.forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+      document.getElementById("navLinks").style.display = "none";
+    }
+
+    window.addEventListener("load", () => {
+      const sections = document.querySelectorAll(".slide-up");
+      sections.forEach((sec, index) => {
+        setTimeout(() => {
+          sec.style.animationDelay = `${index * 0.3}s`;
+          sec.classList.add("slide-up");
+        }, index * 300);
+      });
+    });
+  </script>
+
+</body>
+</html>
